@@ -1,4 +1,4 @@
-package com.jsp.cloth_show_room.controller;
+package com.jsp.cloth_show_room.admin.controller;
 
 import java.io.IOException;
 
@@ -30,17 +30,17 @@ public class AdminController extends HttpServlet{
 		
 		if(admin!=null) {
 			
-			if(admin.getAdminEmail().equalsIgnoreCase(adminEmail)) {
+			if(admin.getAdminPassword().equalsIgnoreCase(adminPassword)) {
 				httpSession.setAttribute("adminName",adminEmail);
 				RequestDispatcher dispatcher = req.getRequestDispatcher("admin-home.jsp");
 				dispatcher.forward(req, resp);
 			}else {
-				req.setAttribute("message","email is incorrect");
+				req.setAttribute("message","AdminPassword is incorrect");
 				RequestDispatcher dispatcher = req.getRequestDispatcher("admin-login.jsp");
 				dispatcher.forward(req, resp);
 			}
 		}else {
-			req.setAttribute("message","username is incorrect");
+			req.setAttribute("message","AdminEmail is incorrect");
 			RequestDispatcher dispatcher = req.getRequestDispatcher("admin-login.jsp");
 			dispatcher.forward(req, resp);
 		}

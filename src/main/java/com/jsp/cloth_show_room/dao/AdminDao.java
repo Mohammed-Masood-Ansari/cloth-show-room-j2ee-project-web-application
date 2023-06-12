@@ -1,10 +1,13 @@
 package com.jsp.cloth_show_room.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import com.jsp.cloth_show_room.dto.Admin;
+
 
 /**
  * 
@@ -16,17 +19,27 @@ public class AdminDao {
 	EntityManager entityManager = Persistence.createEntityManagerFactory("showroom").createEntityManager();
 	
 	
+	
+	
+	public List<Admin> getAllAdmin() {
+		return entityManager.createQuery("FROM Admin").getResultList();
+	}
+	
+	
 	/*
 	 * login with admin
 	 */
 	public Admin loginAdmin(String adminEmail) {
 		
-		String selectadminEmail = "SELECT * FROM admin WHERE adminemail=:name";
+		List<Admin> admins=getAllAdmin();
 		
-		Query query = entityManager.createNativeQuery(selectadminEmail);
-		
-		Admin admin=(Admin) query.getSingleResult();
-		
-		return admin;
+		for (Admin admin : admins) {
+			if(admin.getAdminEmail().equals(adminEmail)) {
+				return admin;
+			}else {
+				return null;
+			}
+		}
+		return null;
 	}
 }
