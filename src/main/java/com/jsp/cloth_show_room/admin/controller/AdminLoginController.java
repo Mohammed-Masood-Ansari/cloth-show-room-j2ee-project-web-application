@@ -14,7 +14,7 @@ import com.jsp.cloth_show_room.dto.Admin;
 import com.jsp.cloth_show_room.service.AdminService;
 
 @WebServlet(value = "/loginAdmin")
-public class AdminController extends HttpServlet{
+public class AdminLoginController extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

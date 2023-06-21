@@ -28,7 +28,7 @@ public class ClothDetailsInsertController extends HttpServlet {
 		String clothType = req.getParameter("clothtype");
 		String wearType = req.getParameter("wearType");
 		double price = Double.parseDouble(req.getParameter("price"));
-		
+		int offer = Integer.parseInt(req.getParameter("offer"));
 		//String image  = req.getParameter("imageFile");
 		/*
 		 * image file reading
@@ -44,6 +44,7 @@ public class ClothDetailsInsertController extends HttpServlet {
 		clothDetails.setClothPrice(price);
 		clothDetails.setClothType(clothType);
 		clothDetails.setWearType(wearType);
+		clothDetails.setOffer(offer);
 		/*
 		 * set image file to byte[] object
 		 */

@@ -36,8 +36,6 @@ public class AdminDao {
 		for (Admin admin : admins) {
 			if(admin.getAdminEmail().equals(adminEmail)) {
 				return admin;
-			}else {
-				return null;
 			}
 		}
 		return null;

@@ -1,27 +1,25 @@
 package com.jsp.cloth_show_room.dto;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 @Entity
-public class ClothDetails {
+public class UserCart {
 
 	@Id
-	private int clothBarCode;
+	private int userCartId;
 	private String clothType;
 	private String wearType;
 	private double clothPrice;
 	private int offer;
 	
-	@Lob
-	private byte[] image;
-	
-	public int getClothBarCode() {
-		return clothBarCode;
+	public int getUserCartId() {
+		return userCartId;
 	}
-	public void setClothBarCode(int clothBarCode) {
-		this.clothBarCode = clothBarCode;
+	public void setUserCartId(int userCartId) {
+		this.userCartId = userCartId;
 	}
 	public String getClothType() {
 		return clothType;
@@ -40,12 +38,6 @@ public class ClothDetails {
 	}
 	public void setClothPrice(double clothPrice) {
 		this.clothPrice = clothPrice;
-	}
-	public byte[] getImage() {
-		return image;
-	}
-	public void setImage(byte[] image) {
-		this.image = image;
 	}
 	public int getOffer() {
 		return offer;

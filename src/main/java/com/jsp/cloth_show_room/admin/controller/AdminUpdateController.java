@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import com.jsp.cloth_show_room.dto.ClothDetails;
 import com.jsp.cloth_show_room.service.ClothDetailsService;
 
 @WebServlet("/adminUpdateController")
+@MultipartConfig
 public class AdminUpdateController extends HttpServlet {
 
 	@Override

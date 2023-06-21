@@ -71,10 +71,14 @@
 													class="form-control form-control-lg" name="price" />
 											</div>
 											
+											<div class="form-outline mb-4">
+												<label class="form-label" for="form3Example4cg">cloth-offer%</label>
+												<input type="number" id="form3Example4cg"
+													class="form-control form-control-lg" name="offer" />
+											</div>
 											
 											<div class="d-flex justify-content-center">
-												<button type="button"
-													class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"><input type="submit" value="ADD"/></button>
+												<input type="submit" value="ADD"/>
 											</div>
 
 										</form>

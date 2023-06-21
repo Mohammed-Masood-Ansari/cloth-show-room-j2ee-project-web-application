@@ -58,7 +58,7 @@
 										</div>
 
 										<div class="pt-1 mb-4">
-											<button class="btn btn-dark btn-lg btn-block" type="button"><input type="submit" value="submit"></button>
+											<input type="submit" value="submit" class="btn btn-primary">
 										</div>
 
 										<a class="small text-muted" href="#!">Forgot password?</a>
