@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import com.jsp.cloth_show_room.dto.BuyNow;
+import com.jsp.cloth_show_room.dto.UserCart;
 
 public class BuyNowDao {
 
@@ -24,7 +25,25 @@ public class BuyNowDao {
 		return buyNow;
 	}
 	
+	/*
+	 * multiple order at a time
+	 */
+	public List<BuyNow> multipleOrderTime(List<BuyNow> buyNows){
+		
+		for (BuyNow buyNow : buyNows) {
+			entityTransaction.begin();
+			entityManager.persist(buyNow);
+			entityTransaction.commit();
+		}	
+		
+		return buyNows;
+	}
 	public List<BuyNow> getAllBuyNows(){
 		return entityManager.createQuery("FROM BuyNow").getResultList();
+	}
+	
+	public UserCart getUserCartByCartId(int userCartId) {
+	
+		return entityManager.find(UserCart.class, userCartId);
 	}
 }

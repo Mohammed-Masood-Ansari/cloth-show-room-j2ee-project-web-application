@@ -19,47 +19,67 @@
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <style type="text/css">
+section {
+	border: solid 2px red;
+	width: 860px;
+	height: 100vh;
+	margin-right: auto;
+	margin-left: auto;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="user-cart-navbar.jsp"></jsp:include>
 	<%
-	CartDao cartDao = new CartDao();
-	List<UserCart> userCarts = cartDao.getAllCarts();
-
-	ClothDetailsDao clothDetailsDao = new ClothDetailsDao();
-
-	List<ClothDetails> clothDetails = clothDetailsDao.getAllClothDetails();
-
-	//ClothDetails clothDetails = clothDetailsDao.getClothDetails(clothBarCode);
-	int finalPrice = 0;
+			String string=(String)request.getAttribute("cartAdd");
+			
+			int count = 0;
 	%>
-
-	<%
-	for (UserCart userCart : userCarts) {
-	%>
-
-	<%
-	for (ClothDetails clothDetail : clothDetails) {
-	%>
-		
-	<%
-	if (userCart.getUserCartId() == clothDetail.getClothBarCode()) {
-	%>
-	<!-- total cart price calculation -->
-	<%
-		finalPrice += userCart.getClothPrice();
-	%>
-	<%
-	byte[] image = clothDetail.getImage();
-
-	String base64Image = Base64.getEncoder().encodeToString(image);
-	%>
+	
+	<%if(string!=null){%>
+	
+		<h3 style="margin: 10px;">Success-Order</h3>
+	<%}%>
 	<section style="margin-top: 80px;">
+		<%
+		CartDao cartDao = new CartDao();
+		List<UserCart> userCarts = cartDao.getAllCarts();
+
+		ClothDetailsDao clothDetailsDao = new ClothDetailsDao();
+
+		List<ClothDetails> clothDetails = clothDetailsDao.getAllClothDetails();
+
+		//ClothDetails clothDetails = clothDetailsDao.getClothDetails(clothBarCode);
+		int finalPrice = 0;
 		
+		UserCart cart =new UserCart();
+		%>
+
+		<%
+		for (UserCart userCart : userCarts) {
+		%>
+		<%cart.setUserCartId(userCart.getUserCartId());%>
+		<%
+		for (ClothDetails clothDetail : clothDetails) {
+		%>
+
+		<%
+		if (userCart.getUserCartId() == clothDetail.getClothBarCode()) {
+		%>
+		<!-- total cart price calculation -->
+		<%
+		finalPrice += userCart.getClothPrice();
+		%>
+		<%
+		byte[] image = clothDetail.getImage();
+
+		String base64Image = Base64.getEncoder().encodeToString(image);
+		%>
+
+		<%count++;%>
 		<article>
 			<div class="card"
-				style="width: 17rem; height: 27rem; float: left; margin-left: 10px;">
+				style="width: 17rem; height: 27rem; float: left; margin-left: 10px; border: solid 2px green; margin-top: 20px;">
 				<div>
 					<img src="data:image/png;base64,<%=base64Image%>"
 						class="card-img-top" alt="myImage" width="60px;" height="310px;">
@@ -76,7 +96,8 @@
 						<%=clothDetail.getClothPrice() - ((clothDetail.getClothPrice()) * (clothDetail.getOffer())) / 100%>&nbsp;
 					</h6>
 					<div style="display: flex;">
-						<a href="openPlaceOrder?barcode=<%=clothDetail.getClothBarCode()%>"
+						<a
+							href="openPlaceOrder?barcode=<%=clothDetail.getClothBarCode()%>"
 							class="btn btn-primary">BuyNow</a> <a
 							href="delete?barcode=<%=clothDetail.getClothBarCode()%>"
 							class="btn btn-primary" style="margin-left: 20px;">DELETE</a>
@@ -84,22 +105,23 @@
 				</div>
 			</div>
 		</article>
-	</section>
-	<%
-	}
-	%>
-	<%
-	}
-	%>
-
-	<%
-	}
-	%>
-	<div>
+		<%
+		}
+		%>
 		
-		<a href="place-order?id" class="btn btn-primary">Place-Order</a>
-		<h3 class="btn btn-primary"><%=finalPrice%></h3>
-	</div>
-
+		<%
+		}
+		%>
+		<%
+		}
+		%>
+	
+		<div style="margin-top: 480px; margin-left: 30px;">
+		<a href="order-all-added-cart.jsp?id=<%=cart.getUserCartId()%>" class="btn btn-primary" style="width: 300px; margin-left: -20px;">Place-Order</a>
+		<a href="#" class="btn btn-primary" style=""><%=finalPrice%></a>
+			
+		</div>
+	
+	</section>
 </body>
 </html>
